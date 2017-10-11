@@ -1,2 +1,2 @@
 # TodoList
-Une petite todoList pour tester react
+Un petit projet pour tester react
