@@ -5,7 +5,13 @@ class TodoList extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {text: '', todos: []};
+    const cachedTodos = localStorage.getItem('state');
+    if (cachedTodos) {
+     this.state = JSON.parse(cachedTodos);
+   }
+   else {
+     this.state = {text: '', todos: []};
+   }
   }
 
   update(e) {
@@ -14,11 +20,13 @@ class TodoList extends Component {
 
   ajout(e) {
     this.setState({todos: [...this.state.todos, this.state.text],text: ''});
+    localStorage.setItem('state', JSON.stringify(this.state));
   }
 
   handleKeyPress(e) {
     if (e.key === 'Enter') {
         this.setState({todos: [...this.state.todos, this.state.text],text: ''});
+        localStorage.setItem('state', JSON.stringify(this.state));
     }
   }
 
